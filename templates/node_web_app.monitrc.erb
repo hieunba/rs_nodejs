@@ -1,0 +1,10 @@
+check host node_web_app_<%= @app %> with address 127.0.0.1
+  start program = "/bin/su - <%= @user %> -c 'cd <%= @path %> ; pm2 start <%= @monitored_script %> <%= @pm_options %>'"
+  stop program = "/bin/su - <%= @user %> -c 'pm2 stop <%= @monitored_script %> '"
+  <% if @params[:enable_ssl] -%>
+  if failed port <%= @params[:nodejs][:port] %> type TCPSSL protocol HTTP
+  <% else -%>
+  if failed port <%= @params[:nodejs][:port] %> type TCP
+  <% end -%>
+    with timeout 15 seconds
+    then restart
