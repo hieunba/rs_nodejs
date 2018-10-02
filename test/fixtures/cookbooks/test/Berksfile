@@ -1,0 +1,5 @@
+source 'https://supermarket.chef.io'
+
+metadata
+
+cookbook 'rs_nodejs', github: 'hieunba/rs_nodejs'
